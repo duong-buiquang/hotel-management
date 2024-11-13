@@ -1,12 +1,13 @@
-import mongoose, { Schema, Document } from "mongoose";
-import { v4 as uuidv4 } from "uuid";
-
+// File: src/models/Hotel.ts
+import mongoose, { Schema, Document } from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
 interface IHotel extends Document {
   hotel_id: string;
   manager_id: string;
   name: string;
   description: string;
   address: string;
+  images: string[]; // Array of image URLs
   created_at: Date;
 }
 
@@ -16,7 +17,8 @@ const HotelSchema: Schema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   address: { type: String, required: true },
-  created_at: { type: Date, default: Date.now },
+  images: { type: [String], default: [] }, // Array of image URLs
+  created_at: { type: Date, default: Date.now }
 });
 
-export default mongoose.model<IHotel>("Hotel", HotelSchema);
+export default mongoose.model<IHotel>('Hotel', HotelSchema);

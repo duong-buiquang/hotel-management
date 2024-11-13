@@ -1,0 +1,28 @@
+/* File: /components/hotel/styles/HotelCard.module.css */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 300px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .imageContainer {
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .details {
+    margin-top: 12px;
+  }
+  
