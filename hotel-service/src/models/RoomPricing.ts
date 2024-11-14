@@ -1,17 +1,16 @@
-import mongoose, { Schema, Document } from "mongoose";
+// File: src/models/RoomPricing.ts
+import mongoose, { Schema, Document } from 'mongoose';
 
 interface IRoomPricing extends Document {
-  room_type_id: string;
+  room_type_id: string; // Reference to RoomType
   date: Date;
   price: number;
-  created_at: Date;
 }
 
 const RoomPricingSchema: Schema = new Schema({
-  room_type_id: { type: String, required: true },
+  room_type_id: { type: String, required: true, ref: 'RoomType' },
   date: { type: Date, required: true },
-  price: { type: Number, required: true },
-  created_at: { type: Date, default: Date.now },
+  price: { type: Number, required: true }
 });
 
-export default mongoose.model<IRoomPricing>("RoomPricing", RoomPricingSchema);
+export default mongoose.model<IRoomPricing>('RoomPricing', RoomPricingSchema);

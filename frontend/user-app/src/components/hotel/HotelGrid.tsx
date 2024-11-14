@@ -9,6 +9,8 @@ interface HotelData {
   images: string[];
   price: number;
   rating: number;
+  description: string;
+  hotel_id: string;
 }
 
 interface HotelGridProps {
@@ -17,18 +19,19 @@ interface HotelGridProps {
 
 const HotelGrid: React.FC<HotelGridProps> = ({ hotels }) => {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+    <main className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
       {hotels.map(hotel => (
         <HotelCard
-          key={hotel.id}
+          key={hotel.hotel_id}
           name={hotel.name}
           location={hotel.location}
           images={hotel.images}
           price={hotel.price}
           rating={hotel.rating}
+          description={hotel.description}
         />
       ))}
-    </div>
+    </main>
   );
 };
 
