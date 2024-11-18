@@ -1,12 +1,15 @@
 {
-    "compilerOptions": {
-      "target": "ES6",
-      "module": "commonjs",
-      "rootDir": "./src",
-      "outDir": "./dist",
-      "strict": true,
-      "esModuleInterop": true
-    },
-    "include": ["src"]
-  }
-  
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*", // Make sure this includes your custom type definitions
+    "src/types/express.d.ts"
+  ]
+}

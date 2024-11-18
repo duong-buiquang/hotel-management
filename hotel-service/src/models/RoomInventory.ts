@@ -1,19 +1,24 @@
-// File: src/models/RoomInventory.ts
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, model, Document, Types } from 'mongoose';
 
-interface IRoomInventory extends Document {
-  room_type_id: string; // Reference to RoomType
+export interface IRoomInventory extends Document {
+  room_type_id: Types.ObjectId;
   date: Date;
   available_rooms: number;
+  created_at: Date;
 }
 
-const RoomInventorySchema: Schema = new Schema({
-  room_type_id: { type: String, required: true, ref: 'RoomType' },
+const roomInventorySchema = new Schema<IRoomInventory>({
+  room_type_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'RoomType',
+    required: true
+  },
   date: { type: Date, required: true },
-  available_rooms: { type: Number, required: true }
+  available_rooms: { type: Number, required: true },
+  created_at: { type: Date, default: Date.now }
 });
 
 export default mongoose.model<IRoomInventory>(
   'RoomInventory',
-  RoomInventorySchema
+  roomInventorySchema
 );

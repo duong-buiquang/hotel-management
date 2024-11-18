@@ -1,7 +1,9 @@
 // File: /components/hotel/HotelCard.tsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface HotelProps {
+  hotelId: string;
   name: string;
   location: string;
   images: string[];
@@ -11,6 +13,7 @@ interface HotelProps {
 }
 
 const HotelCard: React.FC<HotelProps> = ({
+  hotelId,
   name,
   location,
   images,
@@ -18,8 +21,15 @@ const HotelCard: React.FC<HotelProps> = ({
   rating,
   description
 }) => {
+  const navigate = useNavigate();
+  const moveToHotelDetails = () => {
+    navigate(`/rooms/${hotelId}`);
+  };
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+    <div
+      className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 transform hover:scale-105"
+      onClick={moveToHotelDetails}
+    >
       {images && images.length > 0 && (
         <div className="mb-3 overflow-hidden rounded-md">
           <img
@@ -30,7 +40,7 @@ const HotelCard: React.FC<HotelProps> = ({
         </div>
       )}
       <div className="mb-2">
-        <h2 className="text-lg font-bold text-gray-800 mb-1">{name}</h2>
+        <h2 className="text-base font-medium text-[#222222] mb-1">{name}</h2>
         <p className="text-sm text-gray-500">{location}</p>
       </div>
       <p className="text-gray-700 text-sm mb-2">{description}</p>

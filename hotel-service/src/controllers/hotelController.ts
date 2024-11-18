@@ -3,6 +3,10 @@ import { Request, Response } from 'express';
 import Hotel from '../models/Hotel';
 import { uploadToCloudinary } from '../objectStorage'; // Assuming you have a Cloudinary upload function
 import fs from 'fs';
+import RoomType from '../models/RoomType';
+import Amenity from '../models/Amenity';
+import HotelAmenity from '../models/HotelAmenity';
+import RoomTypeAmenity from '../models/RoomTypeAmenity';
 
 export const addHotel = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -70,4 +74,56 @@ export const addHotel = async (req: Request, res: Response): Promise<any> => {
 export const showHotels = async (req: Request, res: Response): Promise<any> => {
   const hotels = await Hotel.find();
   res.status(201).json({ hotels });
+};
+
+export const hotelDetailById = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
+  try {
+    const { hotelId } = req.params;
+
+    // Fetch hotel details
+    const hotel = await Hotel.findById(hotelId).populate('manager_id');
+    if (!hotel) {
+      return res.status(404).json({ message: 'Hotel not found' });
+    }
+
+    // Fetch related room types for the hotel
+    const roomTypes = await RoomType.find({ hotel_id: hotelId });
+
+    // Fetch amenities linked to the hotel using HotelAmenity
+    const hotelAmenitiesLinks = await HotelAmenity.find({ hotel_id: hotelId });
+    const hotelAmenities = await Amenity.find({
+      _id: { $in: hotelAmenitiesLinks.map(link => link.amenity_id) }
+    });
+
+    // Fetch amenities linked to the room types using RoomTypeAmenity
+    const roomTypeAmenities = await Promise.all(
+      roomTypes.map(async roomType => {
+        const roomTypeAmenityLinks = await RoomTypeAmenity.find({
+          room_type_id: roomType._id
+        });
+        const amenities = await Amenity.find({
+          _id: { $in: roomTypeAmenityLinks.map((link: any) => link.amenity_id) }
+        });
+        return {
+          roomType: roomType,
+          amenities: amenities
+        };
+      })
+    );
+
+    // Combine data to send as response
+    const responseData = {
+      hotel,
+      roomTypes,
+      hotelAmenities,
+      roomTypeAmenities
+    };
+
+    res.status(200).json(responseData);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching hotel details', error });
+  }
 };

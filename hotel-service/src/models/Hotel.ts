@@ -1,9 +1,8 @@
 // File: src/models/Hotel.ts
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 interface IHotel extends Document {
-  hotel_id: string;
-  manager_id: string;
+  manager_id: Types.ObjectId;
   name: string;
   description: string;
   address: string;
@@ -12,8 +11,7 @@ interface IHotel extends Document {
 }
 
 const HotelSchema: Schema = new Schema({
-  hotel_id: { type: String, default: uuidv4, unique: true },
-  manager_id: { type: String, required: true },
+  manager_id: { type: Schema.Types.ObjectId, ref: 'User' },
   name: { type: String, required: true },
   description: { type: String, required: true },
   address: { type: String, required: true },
