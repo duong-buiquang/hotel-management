@@ -55,9 +55,10 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-4">
               {/* Avatar that triggers the user menu */}
               <IconButton onClick={handleMenuClick} size="small">
-                <Avatar sx={{ width: 32, height: 32 }}>U</Avatar>{' '}
+                <Avatar sx={{ width: 32, height: 32 }}>D</Avatar>{' '}
                 {/* Replace 'U' with dynamic content */}
               </IconButton>
+
               {/* UserMenu Component */}
               <UserMenu
                 anchorEl={anchorEl}

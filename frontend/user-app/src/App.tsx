@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import { Container } from '@mui/material';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import HotelDetails from './components/HotelDetails';

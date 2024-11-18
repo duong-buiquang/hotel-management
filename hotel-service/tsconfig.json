@@ -11,5 +11,5 @@
   "include": [
     "src/**/*", // Make sure this includes your custom type definitions
     "src/types/express.d.ts"
-  ]
+, "mockData.ts", "mockData.ts"  ]
 }

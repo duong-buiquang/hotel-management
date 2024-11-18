@@ -38,7 +38,6 @@ const PhotoSectionWithModal: React.FC<PhotoSectionProps> = ({ photos }) => {
             className="w-full h-full object-cover rounded-lg"
           />
         </div>
-
         {/* Part 2: Four Smaller Photos */}
         <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full lg:w-1/2 h-full lg:h-full">
           {photos.slice(1, 5).map((photo, index) => (

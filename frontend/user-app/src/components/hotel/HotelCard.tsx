@@ -1,6 +1,7 @@
 // File: /components/hotel/HotelCard.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CustomCarousel } from '../CustomCarousel';
 
 interface HotelProps {
   hotelId: string;
@@ -22,21 +23,20 @@ const HotelCard: React.FC<HotelProps> = ({
   description
 }) => {
   const navigate = useNavigate();
-  const moveToHotelDetails = () => {
+  const moveToHotelDetails = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('.next-prev')) return;
     navigate(`/rooms/${hotelId}`);
   };
+
   return (
     <div
-      className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 transform hover:scale-105"
-      onClick={moveToHotelDetails}
+      className="bg-white rounded-lg cursor-pointer group"
+      onClick={e => moveToHotelDetails(e)}
     >
       {images && images.length > 0 && (
         <div className="mb-3 overflow-hidden rounded-md">
-          <img
-            src={images[0]}
-            alt={name}
-            className="w-full h-32 md:h-40 object-cover rounded-md transition-transform duration-300 hover:scale-105"
-          />
+          <CustomCarousel images={images} />
         </div>
       )}
       <div className="mb-2">
