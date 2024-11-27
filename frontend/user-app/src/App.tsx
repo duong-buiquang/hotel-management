@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import HotelDetails from './components/HotelDetails';
+import { PersonalInfo } from './pages/PersonalInfo';
+import Payment from './pages/Payment';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +15,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="rooms/:hotelId" element={<HotelDetails />} />
+          <Route path="/personal-info" element={<PersonalInfo />} />
+          <Route path="/payment" element={<Payment />} />
           {/* Add more routes as needed */}
         </Routes>
       </div>

@@ -1,8 +1,7 @@
-import { ArrowBack, Close } from '@mui/icons-material';
+import { ArrowBack } from '@mui/icons-material';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { Grip } from 'lucide-react';
-import { Typography } from '@mui/material';
 
 interface PhotoSectionProps {
   photos: string[];

@@ -9,6 +9,7 @@ import {
   HistoryEdu,
   ViewList
 } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 interface UserMenuProps {
   anchorEl: HTMLElement | null;
@@ -23,6 +24,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
   onClose,
   onLogout
 }) => {
+  const navigate = useNavigate();
+  const goToUserInfo = () => {
+    navigate('/personal-info');
+    onClose();
+  };
   return (
     <Menu
       anchorEl={anchorEl}
@@ -57,7 +63,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      <MenuItem onClick={onClose}>
+      <MenuItem onClick={goToUserInfo}>
         <Avatar /> <Typography variant="body2">View Profile</Typography>
       </MenuItem>
       <MenuItem onClick={onClose}>

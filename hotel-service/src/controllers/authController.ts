@@ -1,5 +1,5 @@
 // File: src/controllers/authController.ts
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import User from '../models/User';
 import jwt from 'jsonwebtoken';
 
@@ -54,5 +54,18 @@ export const loginUser = async (req: Request, res: Response): Promise<any> => {
     res.status(200).json({ token, user });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+export const getAllUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<any> => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error: any) {
+    res.status(500).json({ error: error?.message });
   }
 };

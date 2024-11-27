@@ -7,6 +7,7 @@ interface IHotel extends Document {
   description: string;
   address: string;
   images: string[]; // Array of image URLs
+  price: number;
   created_at: Date;
 }
 
@@ -16,6 +17,7 @@ const HotelSchema: Schema = new Schema({
   description: { type: String, required: true },
   address: { type: String, required: true },
   images: { type: [String], default: [] }, // Array of image URLs
+  price: { type: Number, required: true, default: 500 },
   created_at: { type: Date, default: Date.now }
 });
 

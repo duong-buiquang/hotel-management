@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { fetchHotelDetails } from '../services/hotelService';
 import PhotoGrid from './PhotoGrid';
+import DatePicker from './DatePicker';
 
 interface RoomType {
   _id: string;
@@ -99,6 +99,7 @@ const HotelDetails: React.FC = () => {
           ))}
         </ul>
       </div>
+      <DatePicker />
     </div>
   );
 };
